@@ -15,5 +15,12 @@ public class RotationMatrix : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float sin = Mathf.Sin(theta * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(theta * Mathf.Deg2Rad);
+
+        float newX = transform.position.x * cos - transform.position.z * sin;
+        float newZ = transform.position.x * sin + transform.position.z * cos;
+
+        rotatedObject.transform.position = new Vector3(newX, transform.position.y, newZ);
     }
 }
