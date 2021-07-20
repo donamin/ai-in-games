@@ -229,7 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theta: 0
   rotatedObject: {fileID: 811408579}
-  rotatedObject2: {fileID: 1041765284}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1041765285
 CapsuleCollider:
   m_ObjectHideFlags: 0
