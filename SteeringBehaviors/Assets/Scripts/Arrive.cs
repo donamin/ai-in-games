@@ -19,6 +19,44 @@ public class Arrive : BaseSteeringBehavior
         steering.linear = Vector3.zero;
         steering.angular = 0;
 
+        if(target)
+        {
+            Vector3 direction = target.transform.position - character.transform.position;
+            direction.y = 0;
+            float distance = direction.magnitude;
+
+            if(distance < targetRadius)
+            {
+                return steering;
+            }
+
+            float targetSpeed = 0;
+            if(distance > slowRadius)
+            {
+                targetSpeed = maxSpeed;
+            }
+            else
+            {
+                //targetSpeed = maxSpeed * distance / slowRadius;
+                //distance is between targetRadius and slowRadius
+                targetSpeed = maxSpeed * (distance - targetRadius) / (slowRadius - targetRadius);
+            }
+
+            Vector3 targetVelocity = direction;
+            targetVelocity.Normalize();
+            targetVelocity *= targetSpeed;
+
+            steering.linear = targetVelocity - character.velocity;
+            steering.linear /= timeToTarget;
+            steering.linear.y = 0;
+
+            if(steering.linear.magnitude > maxAcceleration)
+            {
+                steering.linear.Normalize();
+                steering.linear *= maxAcceleration;
+            }
+        }
+
         return steering;
     }
 }

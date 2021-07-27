@@ -427,8 +427,8 @@ MonoBehaviour:
   character: {fileID: 0}
   ignoreRotation: 1
   target: {fileID: 1109433260}
-  maxAcceleration: 2.5
-  maxSpeed: 10
+  maxAcceleration: 10
+  maxSpeed: 5
   targetRadius: 3
   slowRadius: 10
   timeToTarget: 0.1
