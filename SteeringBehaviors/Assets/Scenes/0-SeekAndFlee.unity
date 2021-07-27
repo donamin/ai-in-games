@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  ignoreRotation: 1
   target: {fileID: 0}
   flee: 0
   maxAcceleration: 2.5
@@ -442,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  ignoreRotation: 1
   target: {fileID: 899752647}
   flee: 1
   maxAcceleration: 4
@@ -457,6 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9a5b5d842171e499bccb682ae3d540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orientation: 0
   velocity: {x: 0, y: 0, z: 0}
   rotation: 0
 --- !u!65 &793085796
@@ -490,7 +493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9d85d770a83d6544b9b4b82ff51d8e2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -586,7 +589,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7a361e76a2aacf24e9e6f94ecf83773a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -643,6 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  ignoreRotation: 1
   target: {fileID: 793085793}
   flee: 0
   maxAcceleration: 15
@@ -658,6 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9a5b5d842171e499bccb682ae3d540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orientation: 0
   velocity: {x: 0, y: 0, z: 0}
   rotation: 0
 --- !u!1 &1027773556
@@ -707,6 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  ignoreRotation: 1
   target: {fileID: 0}
   flee: 0
   maxAcceleration: 2.5
