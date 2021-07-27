@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrive : BaseSteeringBehavior
+public class Align : BaseSteeringBehavior
 {
-    public GameObject target;
+    public Kinematics target;
 
-    public float maxAcceleration = 2.5f;
-    public float maxSpeed = 10.0f;
+    public float maxAngularAcceleration = 90.0f;
+    public float maxRotation= 45.0f;
 
-    public float targetRadius = 3.0f;
-    public float slowRadius = 10.0f;
+    public float targetRadius = 2.5f;
+    public float slowRadius = 15.0f;
+
     public float timeToTarget = 0.1f;
 
     public override SteeringOutput GetSteering()

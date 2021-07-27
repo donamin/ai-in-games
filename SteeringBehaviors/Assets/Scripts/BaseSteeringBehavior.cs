@@ -11,6 +11,7 @@ public struct SteeringOutput
 public class BaseSteeringBehavior : MonoBehaviour
 {
     public Kinematics character;
+    public bool ignoreRotation = true;
 
     public void Start()
     {

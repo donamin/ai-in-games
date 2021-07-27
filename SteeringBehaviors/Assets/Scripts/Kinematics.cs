@@ -6,6 +6,8 @@ public class Kinematics : MonoBehaviour
 {
     BaseSteeringBehavior steeringBehavior;
 
+    public float orientation = 0;
+
     public Vector3 velocity;
     public float rotation;
 
