@@ -84,21 +84,26 @@ public class NPC_Enemy_FSM : MonoBehaviour
 					break;
 			}
 		}
+
 		currentAction = newState;
-		switch (currentAction)
+
+		if (currentAction != NPC_EnemyAction.NONE)
 		{
-			case NPC_EnemyAction.IDLE:
-				ActionInit_Idle();
-				break;
-			case NPC_EnemyAction.INSPECT:
-				ActionInit_Inspect();
-				break;
-			case NPC_EnemyAction.PATROL:
-				ActionInit_Patrol();
-				break;
-			case NPC_EnemyAction.ATTACK:
-				ActionInit_Attack();
-				break;
+			switch (currentAction)
+			{
+				case NPC_EnemyAction.IDLE:
+					ActionInit_Idle();
+					break;
+				case NPC_EnemyAction.INSPECT:
+					ActionInit_Inspect();
+					break;
+				case NPC_EnemyAction.PATROL:
+					ActionInit_Patrol();
+					break;
+				case NPC_EnemyAction.ATTACK:
+					ActionInit_Attack();
+					break;
+			}
 		}
 	}
 
@@ -343,6 +348,7 @@ public class NPC_Enemy_FSM : MonoBehaviour
 			}
 		}
 	}
+
 	void ActionEnd_Inspect()
 	{
 	}
