@@ -15,6 +15,9 @@ public class RotationMatrix : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawLine(Vector3.zero, transform.position, Color.white);
+        Debug.DrawLine(Vector3.zero, rotatedObject.transform.position, Color.yellow);
+
         float sin = Mathf.Sin(theta * Mathf.Deg2Rad);
         float cos = Mathf.Cos(theta * Mathf.Deg2Rad);
 

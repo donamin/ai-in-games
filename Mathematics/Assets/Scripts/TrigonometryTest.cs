@@ -14,6 +14,5 @@ public class TrigonometryTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(scale * Mathf.Sin(speed * Time.time), 0, scale / 2 * Mathf.Sin(2 * speed * Time.time));
     }
 }
