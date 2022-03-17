@@ -19,19 +19,19 @@ public class Arrive : BaseSteeringBehavior
         steering.linear = Vector3.zero;
         steering.angular = 0;
 
-        if(target)
+        if (target)
         {
             Vector3 direction = target.transform.position - character.transform.position;
             direction.y = 0;
             float distance = direction.magnitude;
 
-            if(distance < targetRadius)
+            if (distance < targetRadius)
             {
                 return steering;
             }
 
             float targetSpeed = 0;
-            if(distance > slowRadius)
+            if (distance > slowRadius)
             {
                 targetSpeed = maxSpeed;
             }
@@ -50,7 +50,7 @@ public class Arrive : BaseSteeringBehavior
             steering.linear /= timeToTarget;
             steering.linear.y = 0;
 
-            if(steering.linear.magnitude > maxAcceleration)
+            if (steering.linear.magnitude > maxAcceleration)
             {
                 steering.linear.Normalize();
                 steering.linear *= maxAcceleration;

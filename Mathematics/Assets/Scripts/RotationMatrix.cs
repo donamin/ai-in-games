@@ -24,6 +24,6 @@ public class RotationMatrix : MonoBehaviour
         float newX = transform.position.x * cos - transform.position.z * sin;
         float newZ = transform.position.x * sin + transform.position.z * cos;
 
-        rotatedObject.transform.position = new Vector3(newX, transform.position.y, newZ);
+        rotatedObject.transform.position = new Vector3(newX, 0, newZ);
     }
 }
