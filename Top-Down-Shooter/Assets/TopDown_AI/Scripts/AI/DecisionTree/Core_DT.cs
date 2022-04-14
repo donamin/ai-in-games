@@ -37,11 +37,11 @@ public class DT_Decision : DT_Node
 
     public override DT_Node GetBranch()
     {
-        return decisionFunction() ? trueNode : falseNode;
-        /*if (decisionFunction() == true)
+        //return decisionFunction() ? trueNode : falseNode;
+        if (decisionFunction() == true)
             return trueNode;
         else
-            return falseNode;*/
+            return falseNode;
     }
 
     public override DT_Node MakeDecision()

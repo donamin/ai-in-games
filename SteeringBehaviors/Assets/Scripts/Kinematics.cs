@@ -33,6 +33,15 @@ public class Kinematics : MonoBehaviour
             if(velocity.sqrMagnitude > 0)
                 transform.forward = velocity;
         }
+        else
+        {
+            orientation += rotation * Time.deltaTime;
+            if (orientation > 360)
+                orientation -= 360;
+            if (orientation < 0)
+                orientation += 360;
+            transform.forward = new Vector3(Mathf.Sin(orientation * Mathf.Deg2Rad), 0, Mathf.Cos(orientation * Mathf.Deg2Rad));
+        }
 
         //Return the object to the middle of the screen if it gets too far!
         if (transform.position.magnitude > 40)

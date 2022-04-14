@@ -15,6 +15,7 @@ public class NPC_Enemy_DT : MonoBehaviour
 	public LayerMask hitTestLayer;
 
 	Vector3 targetPos, startingPos;
+	float lastSetTargetTime = -10;
 	int hashSpeed;
 
 	public NPC_WeaponType weaponType = NPC_WeaponType.KNIFE;
@@ -37,7 +38,7 @@ public class NPC_Enemy_DT : MonoBehaviour
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		startingPos = transform.position;
 		hashSpeed = Animator.StringToHash("Speed");
 		SetWeapon(weaponType);
@@ -45,36 +46,39 @@ public class NPC_Enemy_DT : MonoBehaviour
 		BuildDecisionTree();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 		npcAnimator.SetFloat(hashSpeed, navMeshAgent.velocity.magnitude);
 
-		DT_Action dt_NewAction = null;
-		if (!useHardcodedDT)
+		if (dtNode_Root != null)
 		{
-			dt_NewAction = dtNode_Root.MakeDecision() as DT_Action;
-		}
-		else
-        {
-            //TODO: YOUR CODE HERE (Q2)
-		}
-		if (dt_NewAction != null)
-		{
-			if (dt_NewAction != dt_LastAction)
+			DT_Action dt_NewAction = null;
+			if (!useHardcodedDT)
 			{
-				if (dt_LastAction != null)
-				{
-					dt_LastAction.end();
-				}
-				dt_NewAction.init();
+				dt_NewAction = dtNode_Root.MakeDecision() as DT_Action;
 			}
 			else
 			{
-				dt_NewAction.update();
+				//TODO: YOUR CODE HERE (Q2)
 			}
+			if (dt_NewAction != null)
+			{
+				if (dt_NewAction != dt_LastAction)
+				{
+					if (dt_LastAction != null)
+					{
+						dt_LastAction.end();
+					}
+					dt_NewAction.init();
+				}
+				else
+				{
+					dt_NewAction.update();
+				}
+			}
+			dt_LastAction = dt_NewAction;
 		}
-		dt_LastAction = dt_NewAction;
 
 		//canHearPlayer = false;
 	}
@@ -93,7 +97,7 @@ public class NPC_Enemy_DT : MonoBehaviour
 	}
 
 	bool CanSeePlayer()
-    {
+	{
 		RaycastHit hit = new RaycastHit();
 		int nRays = 100;
 		for (int i = 0; i < nRays; i++)
@@ -105,18 +109,22 @@ public class NPC_Enemy_DT : MonoBehaviour
 				return true;
 			}
 		}
+		if (Time.time - lastSetTargetTime < 3)
+			return true;
 		return false;
 	}
 
 	bool CanHearPlayer()
-    {
+	{
 		return canHearPlayer;
 	}
 
 	bool IsInAttackRange()
-    {
+	{
+		if (Time.time - lastSetTargetTime > 0.25f)
+			return false;
 		return inAttackRange;
-    }
+	}
 
 	public void SetAction(NPC_EnemyAction newAction)
 	{
@@ -199,6 +207,7 @@ public class NPC_Enemy_DT : MonoBehaviour
 	public void SetTargetPos(Vector3 newPos)
 	{
 		targetPos = newPos;
+		lastSetTargetTime = Time.time;
 	}
 
 	public void SetAlertPos(Vector3 newPos)
@@ -231,7 +240,7 @@ public class NPC_Enemy_DT : MonoBehaviour
 
 	void ActionUpdate_Idle() { }
 
-	void ActionEnd_Idle() {	}
+	void ActionEnd_Idle() { }
 	//////////////////////////////////////////////////////////////////////////
 
 	//////////////////////////// Action: INSPECT /////////////////////////////
@@ -249,13 +258,13 @@ public class NPC_Enemy_DT : MonoBehaviour
 	}
 	void ActionUpdate_Inspect()
 	{
+		navMeshAgent.SetDestination(targetPos);
 		if (HasReachedMyDestination() && !inspectWait)
 		{
 			inspectWait = true;
 			inspectTimer.StartTimer(2.0f);
 			inspectTurnTimer.StartTimer(1.0f);
 		}
-		navMeshAgent.SetDestination(targetPos);
 		RaycastHit hit;
 		Physics.Raycast(transform.position, transform.forward, out hit, weaponRange, hitTestLayer);
 
@@ -308,7 +317,7 @@ public class NPC_Enemy_DT : MonoBehaviour
 		npcAnimator.SetBool("Attack", false);
 	}
 	//////////////////////////////////////////////////////////////////////////
-	
+
 	///////////////////////////// Action: PATROL /////////////////////////////
 	void ActionInit_Patrol()
 	{
