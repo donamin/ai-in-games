@@ -60,7 +60,7 @@ public class Dijkstra : MonoBehaviour
 
         InitializeSearch();
 
-        foreach (Connection conn in connections)
+        foreach(Connection conn in connections)
         {
             conn.cost = Vector3.Distance(nodes[conn.from].transform.position, nodes[conn.to].transform.position);
         }
@@ -70,12 +70,12 @@ public class Dijkstra : MonoBehaviour
     {
         iteration = 0;
 
-        openList.Clear();
-
         NodeRecord startRecord;
         startRecord.node = startNode;
         startRecord.connection = -1;
         startRecord.costSoFar = 0;
+
+        openList.Clear();
         openList.Add(startRecord);
 
         closedList.Clear();
@@ -97,7 +97,9 @@ public class Dijkstra : MonoBehaviour
             {
                 iteration++;
                 pathfindingStatus = "In progress...";
+
                 currentNode = FindSmallestOpenNode();
+
                 if (currentNode.node == goalNode)
                 {
                     //We have found the goal, so we should terminate.
@@ -105,43 +107,45 @@ public class Dijkstra : MonoBehaviour
                 else
                 {
                     List<int> connectionIDs = GetConnections(currentNode.node);
-                    foreach (int connectionID in connectionIDs)
+
+                    foreach(int connectionID in connectionIDs)
                     {
                         int endNode = connections[connectionID].to;
 
                         NodeRecord endNodeRecord;
+
                         float endNodeCost = currentNode.costSoFar + connections[connectionID].cost;
 
                         int indexInClosedList = Contains(closedList, endNode);
                         int indexInOpenList = Contains(openList, endNode);
 
-                        if (indexInClosedList != -1)
+                        if(indexInClosedList != -1)
                         {
-                            //Ignore if the node is in the closed list.
+                            //Ignore the connection because the endNode is in the closed list.
                             continue;
                         }
-                        else if (indexInOpenList > -1)
+                        if (indexInOpenList != -1)
                         {
-                            //Make sure that the new found route is better than the previous one
+                            //Check if the new found path is better than the previous one.
                             endNodeRecord = openList[indexInOpenList];
                             if (endNodeRecord.costSoFar <= endNodeCost)
                                 continue;
                         }
                         else
                         {
-                            //This is an unvisited node, so we need to store it in the open list.
                             endNodeRecord.node = endNode;
                         }
                         endNodeRecord.costSoFar = endNodeCost;
                         endNodeRecord.connection = connectionID;
-                        if (indexInOpenList > -1)
+
+                        if(indexInOpenList != -1)
                         {
-                            //Update the statistics in the open list
+                            //Update the record in the open list
                             openList[indexInOpenList] = endNodeRecord;
                         }
                         else
                         {
-                            //Otherwise, add the new node to the open list.
+                            //Add the node to the open list
                             openList.Add(endNodeRecord);
                         }
                     }

@@ -339,9 +339,9 @@ public class AStar : MonoBehaviour
             style.normal.textColor = c;
             Handles.Label(mid + rgt, string.Format("{0:0.0}", conn.cost), style);
         }
-        if(foundPath && smoothedPath)
+        if (foundPath && smoothedPath)
         {
-            for(int i = 0; i < finalPathSmoothed.Count - 1; i++)
+            for (int i = 0; i < finalPathSmoothed.Count - 1; i++)
             {
                 Debug.DrawLine(nodes[finalPathSmoothed[i]].transform.position, nodes[finalPathSmoothed[i + 1]].transform.position, Color.cyan);
             }
