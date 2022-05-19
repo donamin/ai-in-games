@@ -47,7 +47,7 @@ public class Agent_GA : Agent
     public override Action GetAction()
     {
         MyLineRenderer.Init();
-        //Initialize population
+        //Initialize the population
         for (int i = 0; i < 2; i++)
             populations[i].Clear();
         popIndex = 0;
@@ -71,11 +71,10 @@ public class Agent_GA : Agent
         }
         //Go over the population one last time to find the best answer found by GA
         EvaluateCurrentPopulation();
-        //print(populations[popIndex][eliteIndex]);
         //Now extract first action from populations[popIndex][eliteIndex]
         lastBestChromosome = populations[popIndex][eliteIndex];
         int actionIdx = lastBestChromosome[0] == '0' ? 0 : 1;
-        return (Action)(actionIdx);
+        return (Action)actionIdx;
     }
 
     string RandomChromosome()
@@ -123,7 +122,7 @@ public class Agent_GA : Agent
     float ComputeFitness(string chromosome)
     {
         //Load the current state
-        currentState.Save();
+        currentState.Load();
         //Inialize birdPos array to draw on screen
         birdPosList = new List<Vector3>();
         birdPosList.Add(currentState.birdPos);
@@ -147,6 +146,7 @@ public class Agent_GA : Agent
 
     void FillMatingPool()
     {
+        matingPoolIndices.Clear();
         for (int i = 0; i < sizeGeneration; i++)
         {
             float r = Random.Range(0.0f, 1.0f);

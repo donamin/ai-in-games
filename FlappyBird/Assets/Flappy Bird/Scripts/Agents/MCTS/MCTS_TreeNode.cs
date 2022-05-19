@@ -41,7 +41,7 @@ public class MCTS_TreeNode
         MyLineRenderer.Init();
         for(int i = 0; i < numIterations; i++)
         {
-            currentState.Save();
+            currentState.Load();
             birdPosList = new List<Vector3>();
             birdPosList.Add(currentState.birdPos);
             MCTS_TreeNode selected = treePolicy();

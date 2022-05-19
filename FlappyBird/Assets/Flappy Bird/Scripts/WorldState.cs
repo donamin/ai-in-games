@@ -23,7 +23,7 @@ public class WorldState
         columnsGotScore = new bool[ColumnPool._.columns.Length];
     }
 
-    public void Save()
+    public void Load()
     {
         score = MyGameManager.score;
         gameOver = MyGameManager.gameOver;
